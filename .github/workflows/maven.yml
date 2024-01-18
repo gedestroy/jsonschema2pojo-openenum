@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
   pull_request:
-    branches: [ "master", "develop" ]
+    branches: [ "fork_master", "fork_develop" ]
 
 jobs:
   build:
@@ -29,7 +29,7 @@ jobs:
       run: mvn install -Dmaven.javadoc.skip=true -B -V
 
     - name: Release to maven central
-      if: github.ref_name == 'master' && github.event_name != 'pull_request' && github.repository == 'swisspost/jsonschema2pojo-openenum'
+      if: github.ref_name == 'fork_master' && github.event_name != 'pull_request' && github.repository == 'gedestroy/jsonschema2pojo-openenum'
       run: |
         curl -s get.sdkman.io | bash
         source "$HOME/.sdkman/bin/sdkman-init.sh"
